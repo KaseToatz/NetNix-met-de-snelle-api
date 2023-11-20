@@ -1,12 +1,16 @@
 import uvicorn
+import os
 
 from argparse import ArgumentParser
+from dotenv import load_dotenv
 
 from src import App, Connection
 
-DB_USER = ""
-DB_PASSWORD = ""
-DB_NAME = ""
+load_dotenv()
+
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_NAME = os.getenv("DB_NAME")
 
 app = App("NetNix", Connection(DB_USER, DB_PASSWORD, "127.0.0.1", 3306, DB_NAME))
 

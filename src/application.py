@@ -3,8 +3,10 @@ import asyncio
 
 from fastapi import FastAPI
 from importlib import import_module
+from starlette.middleware.base import BaseHTTPMiddleware
+
 from .exceptions import MissingSetupFunction
-from . import Connection
+from . import Connection, HTTPMiddleware
 
 class App(FastAPI):
 
@@ -13,9 +15,13 @@ class App(FastAPI):
         self._db = db
         self.pool: aiomysql.Pool = None
         self.add_event_handler("startup", self._startup)
+        self.add_middleware(BaseHTTPMiddleware, dispatch=HTTPMiddleware(self))
 
     async def _startup(self) -> None:
-        self.pool = await aiomysql.create_pool(user=self._db.username, password=self._db.password, host=self._db.host, port=self._db.port, db=self._db.database, loop=asyncio.get_event_loop())
+        try:
+            self.pool = await aiomysql.create_pool(user=self._db.username, password=self._db.password, host=self._db.host, port=self._db.port, db=self._db.database, loop=asyncio.get_event_loop())
+        except:
+            pass
 
     def addEndpoint(self, path: str) -> None:
         module = import_module(path)

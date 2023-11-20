@@ -1,5 +1,6 @@
 from typing import Any
 from fastapi.responses import Response
+
 from . import App, Method
 
 class Endpoint:
