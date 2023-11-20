@@ -2,11 +2,15 @@ import uvicorn
 
 from argparse import ArgumentParser
 
-from src import App
+from src import App, Connection
 
-app = App("NetNix")
+DB_USER = ""
+DB_PASSWORD = ""
+DB_NAME = ""
 
-app.loadEndpoint("endpoints.template")
+app = App("NetNix", Connection(DB_USER, DB_PASSWORD, "127.0.0.1", 3306, DB_NAME))
+
+app.addEndpoint("endpoints.template")
 
 if __name__ == "__main__":
     argparser = ArgumentParser()

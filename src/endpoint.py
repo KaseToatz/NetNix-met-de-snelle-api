@@ -5,7 +5,7 @@ from . import App, Method
 class Endpoint:
 
     def __init__(self, app: App, method: Method, path: str, responseClass: Response) -> None:
-        self.db = app.db
+        self.pool = app.pool
         self.method = method
         self.path = path
         self.responseClass = responseClass
