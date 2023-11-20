@@ -1,9 +1,12 @@
 import uvicorn
 
-from fastapi import FastAPI
 from argparse import ArgumentParser
 
-app = FastAPI(title="NetNix API", redoc_url=None, swagger_ui_oauth2_redirect_url=None)
+from src import App
+
+app = App("NetNix")
+
+app.loadEndpoint("endpoints.template")
 
 if __name__ == "__main__":
     argparser = ArgumentParser()
