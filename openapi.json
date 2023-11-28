@@ -1,0 +1,25 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "NetNix",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/authenticate": {
+            "post": {
+                "summary": "Authenticate",
+                "operationId": "Authenticate__post",
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
