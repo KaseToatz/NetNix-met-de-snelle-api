@@ -5,7 +5,7 @@
         "version": "0.1.0"
     },
     "paths": {
-        "/register": {
+        "/user/register": {
             "post": {
                 "summary": "Register",
                 "description": "Register a new user.",
@@ -43,7 +43,7 @@
                 }
             }
         },
-        "/login": {
+        "/user/login": {
             "post": {
                 "summary": "Login",
                 "description": "Login an existing user.",
@@ -81,7 +81,7 @@
                 }
             }
         },
-        "/editpassword": {
+        "/user/editpassword": {
             "post": {
                 "summary": "Edit Password",
                 "description": "Edit user's password.",
@@ -127,7 +127,7 @@
                 }
             }
         },
-        "/editemail": {
+        "/user/editemail": {
             "post": {
                 "summary": "Edit Email",
                 "description": "Edit user's email.",
@@ -155,6 +155,64 @@
                         }
                     }
                 },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/getsubcription": {
+            "get": {
+                "summary": "Get Subscription",
+                "description": "Get a user's subscription.",
+                "operationId": "GetSubscription__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "subscriptionTier": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/updatesubscription": {
+            "post": {
+                "summary": "Update Subscription",
+                "description": "Update a user's subscription.",
+                "operationId": "UpdateSubscription__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Succesful Response",
