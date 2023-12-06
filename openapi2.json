@@ -1,0 +1,438 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "NetNix",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/add_movie": {
+            "post": {
+                "summary": "Add Movie",
+                "description": "Adds a new movie.",
+                "operationId": "AddMovie__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for ading a new movie.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "duration": {
+                                        "type": "int"
+                                    },
+                                    "genre_id": {
+                                        "type": "int"
+                                    },
+                                    "filepath": {
+                                        "type": "string"
+                                    },
+                                    "resolution": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_movie_minimumage": {
+            "post": {
+                "summary": "Get Movie Minimumage",
+                "description": "Gets a movie's minmum age.",
+                "operationId": "GetMovieMinimumage__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "movieMinimumage": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_movie_viewer_guide": {
+            "post": {
+                "summary": "Get Movie Viewer Guide",
+                "description": "Gets a movie's viewer guide.",
+                "operationId": "GetMovieViewerGuide__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "movieViewerGuide": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_simmilar_movie": {
+            "post": {
+                "summary": "Get Simmilar Movie",
+                "description": "Gets a movie which is simmilar to another movie.",
+                "operationId": "GetSimmilarMovie__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "simmilarMovie": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_movie_resolution": {
+            "post": {
+                "summary": "Get Movie Resolution",
+                "description": "Gets a movie's resolution.",
+                "operationId": "GetMovieResolution__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "movieResolution": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/add_serie": {
+            "post": {
+                "summary": "Add Serie",
+                "description": "Adds a new serie.",
+                "operationId": "AddSerie__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for ading a new serie.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "genre_id": {
+                                        "type": "int"
+                                    },
+                                    "resolution": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_serie_minimumage": {
+            "post": {
+                "summary": "Get Serie Minimumage",
+                "description": "Gets a serie's minmum age.",
+                "operationId": "GetSerieMinimumage__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "serieMinimumage": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_serie_viewer_guide": {
+            "post": {
+                "summary": "Get Serie Viewer Guide",
+                "description": "Gets a serie's viewer guide.",
+                "operationId": "GetSerieViewerGuide__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "serieViewerGuide": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_simmilar_serie": {
+            "post": {
+                "summary": "Get Simmilar Serie",
+                "description": "Gets a serie which is simmilar to another serie.",
+                "operationId": "GetSimmilarSerie__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "simmilarSerie": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_serie_resolution": {
+            "post": {
+                "summary": "Get Serie Resolution",
+                "description": "Gets a serie's resolution.",
+                "operationId": "GetSerieResolution__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "serieResolution": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_serie_episodes": {
+            "post": {
+                "summary": "Get Serie Episodes",
+                "description": "Gets a serie's episodes.",
+                "operationId": "GetSerieEpisodes__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "serieEpisodes": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/add_episode": {
+            "post": {
+                "summary": "Add Episode",
+                "description": "Adds a new episode.",
+                "operationId": "AddEpisode__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for ading a new movie.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "duration": {
+                                        "type": "int"
+                                    },
+                                    "serie_id": {
+                                        "type": "int"
+                                    },
+                                    "season": {
+                                        "type": "int"
+                                    },
+                                    "filepath": {
+                                        "type": "string"
+                                    }              
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
