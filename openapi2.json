@@ -5,7 +5,7 @@
         "version": "0.1.0"
     },
     "paths": {
-        "/add_movie": {
+        "/movie/add": {
             "post": {
                 "summary": "Add Movie",
                 "description": "Adds a new movie.",
@@ -45,6 +45,7 @@
                         }
                     }
                 },
+                
                 "responses": {
                     "200": {
                         "description": "Succesful Response",
@@ -60,7 +61,7 @@
                 }
             }
         },
-        "/get_movie_minimumage": {
+        "/movie/delete": {
             "post": {
                 "summary": "Get Movie Minimumage",
                 "description": "Gets a movie's minmum age.",
@@ -81,7 +82,6 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "movieMinimumage": "int"
                                     }
                                 }
                             }
@@ -90,11 +90,39 @@
                 }
             }
         },
-        "/get_movie_viewer_guide": {
+        "/movie/update": {
             "post": {
-                "summary": "Get Movie Viewer Guide",
-                "description": "Gets a movie's viewer guide.",
-                "operationId": "GetMovieViewerGuide__get",
+                "summary": "Update Movie",
+                "description": "Updates a movie.",
+                "operationId": "UpdateMovie__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/movie/getmovie": {
+            "get": {
+                "summary": "Get Simmilar Movie",
+                "description": "Gets a movie which is simmilar to another movie.",
+                "operationId": "GetSimmilarMovie__get",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -111,7 +139,7 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "movieViewerGuide": "int"
+                                        "movie": "int"
                                     }
                                 }
                             }
@@ -120,8 +148,8 @@
                 }
             }
         },
-        "/get_simmilar_movie": {
-            "post": {
+        "/movie/getsimmilarmovie": {
+            "get": {
                 "summary": "Get Simmilar Movie",
                 "description": "Gets a movie which is simmilar to another movie.",
                 "operationId": "GetSimmilarMovie__get",
@@ -150,37 +178,7 @@
                 }
             }
         },
-        "/get_movie_resolution": {
-            "post": {
-                "summary": "Get Movie Resolution",
-                "description": "Gets a movie's resolution.",
-                "operationId": "GetMovieResolution__get",
-                "paramaters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "User Authentication",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Succesful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "movieResolution": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/add_serie": {
+        "/serie/add": {
             "post": {
                 "summary": "Add Serie",
                 "description": "Adds a new serie.",
@@ -229,8 +227,64 @@
                 }
             }
         },
-        "/get_serie_minimumage": {
+        "/serie/delete": {
             "post": {
+                "summary": "Add Serie",
+                "description": "Adds a new serie.",
+                "operationId": "AddSerie__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/serie/update": {
+            "post": {
+                "summary": "Add Serie",
+                "description": "Adds a new serie.",
+                "operationId": "AddSerie__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/serie/getserie": {
+            "get": {
                 "summary": "Get Serie Minimumage",
                 "description": "Gets a serie's minmum age.",
                 "operationId": "GetSerieMinimumage__get",
@@ -250,7 +304,7 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "serieMinimumage": "int"
+                                        "serie": "int"
                                     }
                                 }
                             }
@@ -259,38 +313,8 @@
                 }
             }
         },
-        "/get_serie_viewer_guide": {
-            "post": {
-                "summary": "Get Serie Viewer Guide",
-                "description": "Gets a serie's viewer guide.",
-                "operationId": "GetSerieViewerGuide__get",
-                "paramaters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "User Authentication",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Succesful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "serieViewerGuide": "int"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/get_simmilar_serie": {
-            "post": {
+        "/serie/getsimmilarserie": {
+            "get": {
                 "summary": "Get Simmilar Serie",
                 "description": "Gets a serie which is simmilar to another serie.",
                 "operationId": "GetSimmilarSerie__get",
@@ -319,38 +343,8 @@
                 }
             }
         },
-        "/get_serie_resolution": {
-            "post": {
-                "summary": "Get Serie Resolution",
-                "description": "Gets a serie's resolution.",
-                "operationId": "GetSerieResolution__get",
-                "paramaters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "User Authentication",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Succesful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "serieResolution": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/get_serie_episodes": {
-            "post": {
+        "/serie/getepisodes": {
+            "get": {
                 "summary": "Get Serie Episodes",
                 "description": "Gets a serie's episodes.",
                 "operationId": "GetSerieEpisodes__get",
@@ -379,7 +373,7 @@
                 }
             }
         },
-        "/add_episode": {
+        "/episode/add": {
             "post": {
                 "summary": "Add Episode",
                 "description": "Adds a new episode.",
@@ -419,6 +413,62 @@
                         }
                     }
                 },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/episode/delete": {
+            "post": {
+                "summary": "Add Episode",
+                "description": "Adds a new episode.",
+                "operationId": "AddEpisode__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/episode/update": {
+            "post": {
+                "summary": "Update Episode",
+                "description": "Updates an episode.",
+                "operationId": "UpdateEpisode__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Succesful Response",
