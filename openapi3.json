@@ -1,0 +1,311 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "NetNix",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/user/addprofile": {
+            "post": {
+                "summary": "Add profile",
+                "description": "Add profile to user.",
+                "operationId": "AddProfile__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for creating a new profile.",
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "age": {
+                                        "type": "string"
+                                    },
+                                    "profilePicture": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "language": {
+                                        "type": "string"
+                                    },
+                                    "preferences": {
+                                        "type": "object",
+                                        "properties": {
+                                            "genre": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/editprofile": {
+            "post": {
+                "summary": "Edit profile",
+                "description": "Edit user profile",
+                "operationId": "EditProfile__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for editing a profile.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "age": {
+                                        "type": "string"
+                                    },
+                                    "profilePicture": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "language": {
+                                        "type": "string"
+                                    },
+                                    "preferences": {
+                                        "type": "object",
+                                        "properties": {
+                                            "genre": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        "nullable": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/addmovietowatchlist": {
+            "post": {
+                "summary": "Add movie to watchlist",
+                "description": "Add movie to watchlist",
+                "operationId": "AddMovieToWatchlist__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for adding a movie to the watchlist",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/removemoviefromwatchlist": {
+            "post": {
+                "summary": "Remove movie from watchlist",
+                "description": "Remove movie from watchlist",
+                "operationId": "RemoveMovieFromWatchlist__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for removing a movie from the watchlist",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/addserietowatchlist": {
+            "post": {
+                "summary": "Add serie to watchlist",
+                "description": "Add serie to watchlist",
+                "operationId": "AddSerieToWatchlist__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for adding a serie to the watchlist",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/removeseriefromwatchlist": {
+            "post": {
+                "summary": "Remove serie from watchlist",
+                "description": "Remove serie from watchlist",
+                "operationId": "RemoveSerieFromWatchlist__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for removing a serie from the watchlist",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "int"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
