@@ -11,7 +11,7 @@ from . import Connection, HTTPMiddleware
 class App(FastAPI):
 
     def __init__(self, title: str, db: Connection) -> None:
-        super().__init__(title=title, redoc_url=None, swagger_ui_oauth2_redirect_url=None, root_path="/api/v1")
+        super().__init__(title=title, redoc_url=None, root_path="/api/v1")
         self._db = db
         self.pool: aiomysql.Pool = None
         self.add_event_handler("startup", self._startup)
