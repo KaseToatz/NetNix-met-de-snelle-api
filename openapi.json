@@ -81,11 +81,11 @@
                 }
             }
         },
-        "/user/editpassword": {
-            "post": {
+        "/user/password": {
+            "put": {
                 "summary": "Edit Password",
                 "description": "Edit user's password.",
-                "operationId": "EditPassword__post",
+                "operationId": "EditPassword__put",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -127,8 +127,8 @@
                 }
             }
         },
-        "/user/editemail": {
-            "post": {
+        "/user/email": {
+            "put": {
                 "summary": "Edit Email",
                 "description": "Edit user's email.",
                 "operationId": "EditEmail__post",
@@ -170,7 +170,7 @@
                 }
             }
         },
-        "/user/getsubcription": {
+        "/user/subscription": {
             "get": {
                 "summary": "Get Subscription",
                 "description": "Get a user's subscription.",
@@ -198,10 +198,8 @@
                         }
                     }
                 }
-            }
-        },
-        "/user/updatesubscription": {
-            "post": {
+            },
+            "put": {
                 "summary": "Update Subscription",
                 "description": "Update a user's subscription.",
                 "operationId": "UpdateSubscription__post",

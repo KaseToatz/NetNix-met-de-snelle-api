@@ -5,7 +5,7 @@
         "version": "0.1.0"
     },
     "paths": {
-        "/movie/add": {
+        "/movie": {
             "post": {
                 "summary": "Add Movie",
                 "description": "Adds a new movie.",
@@ -19,7 +19,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Data required for ading a new movie.",
+                    "description": "Data required for adding a new movie.",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -45,7 +45,6 @@
                         }
                     }
                 },
-                
                 "responses": {
                     "200": {
                         "description": "Succesful Response",
@@ -59,13 +58,11 @@
                         }
                     }
                 }
-            }
-        },
-        "/movie/delete": {
-            "post": {
-                "summary": "Get Movie Minimumage",
-                "description": "Gets a movie's minmum age.",
-                "operationId": "GetMovieMinimumage__get",
+            },
+            "delete": {
+                "summary": "Delete Movie",
+                "description": "Delete an existing movie.",
+                "operationId": "DeleteMovie__delete",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -88,13 +85,11 @@
                         }
                     }
                 }
-            }
-        },
-        "/movie/update": {
-            "post": {
+            },
+            "patch": {
                 "summary": "Update Movie",
                 "description": "Updates a movie.",
-                "operationId": "UpdateMovie__post",
+                "operationId": "UpdateMovie__patch",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -103,6 +98,33 @@
                         "required": true
                     }
                 ],
+                "requestBody": {
+                    "description": "Data required for updating a movie.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "duration": {
+                                        "type": "int"
+                                    },
+                                    "genre_id": {
+                                        "type": "int"
+                                    },
+                                    "filepath": {
+                                        "type": "string"
+                                    },
+                                    "resolution": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Succesful Response",
@@ -116,19 +138,22 @@
                         }
                     }
                 }
-            }
-        },
-        "/movie/getmovie": {
+            },
             "get": {
-                "summary": "Get Simmilar Movie",
-                "description": "Gets a movie which is simmilar to another movie.",
-                "operationId": "GetSimmilarMovie__get",
+                "summary": "Get Movie",
+                "description": "Gets a movie.",
+                "operationId": "GetMovie__get",
                 "paramaters": [
                     {
                         "name": "Authorization",
                         "in": "header",
                         "description": "User Authentication",
                         "required": true
+                    },
+                    {
+                        "name": "movieId",
+                        "in": "query",
+                        "description": "The ID of the movie."
                     }
                 ],
                 "responses": {
@@ -139,37 +164,21 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "movie": "int"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/movie/getsimmilarmovie": {
-            "get": {
-                "summary": "Get Simmilar Movie",
-                "description": "Gets a movie which is simmilar to another movie.",
-                "operationId": "GetSimmilarMovie__get",
-                "paramaters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "User Authentication",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Succesful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "simmilarMovie": "int"
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "duration": {
+                                            "type": "int"
+                                        },
+                                        "genre_id": {
+                                            "type": "int"
+                                        },
+                                        "filepath": {
+                                            "type": "string"
+                                        },
+                                        "resolution": {
+                                            "type": "string"
+                                        }
                                     }
                                 }
                             }
