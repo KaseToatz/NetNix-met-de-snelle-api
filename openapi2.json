@@ -187,7 +187,7 @@
                 }
             }
         },
-        "/serie/add": {
+        "/serie": {
             "post": {
                 "summary": "Add Serie",
                 "description": "Adds a new serie.",
@@ -234,13 +234,11 @@
                         }
                     }
                 }
-            }
-        },
-        "/serie/delete": {
-            "post": {
-                "summary": "Add Serie",
-                "description": "Adds a new serie.",
-                "operationId": "AddSerie__post",
+            },
+            "delete": {
+                "summary": "Delete Serie",
+                "description": "Deletes an existing serie.",
+                "operationId": "DeleteSerie__delete",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -262,13 +260,11 @@
                         }
                     }
                 }
-            }
-        },
-        "/serie/update": {
-            "post": {
-                "summary": "Add Serie",
-                "description": "Adds a new serie.",
-                "operationId": "AddSerie__post",
+            },
+            "patch": {
+                "summary": "Update Serie",
+                "description": "Updates an existing serie.",
+                "operationId": "UpdateSerie__patch",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -277,6 +273,27 @@
                         "required": true
                     }
                 ],
+                "requestBody": {
+                    "description": "Data required for ading a new serie.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "genre_id": {
+                                        "type": "int"
+                                    },
+                                    "resolution": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Succesful Response",
@@ -290,19 +307,22 @@
                         }
                     }
                 }
-            }
-        },
-        "/serie/getserie": {
+            },
             "get": {
-                "summary": "Get Serie Minimumage",
-                "description": "Gets a serie's minmum age.",
-                "operationId": "GetSerieMinimumage__get",
+                "summary": "Get Serie",
+                "description": "Gets a serie.",
+                "operationId": "GetSerie__get",
                 "paramaters": [
                     {
                         "name": "Authorization",
                         "in": "header",
                         "description": "User Authentication",
                         "required": true
+                    },
+                    {
+                        "name": "serieId",
+                        "in": "query",
+                        "description": "The ID of the serie."
                     }
                 ],
                 "responses": {
@@ -313,7 +333,15 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "serie": "int"
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "genre_id": {
+                                            "type": "int"
+                                        },
+                                        "resolution": {
+                                            "type": "string"
+                                        }
                                     }
                                 }
                             }
@@ -322,67 +350,7 @@
                 }
             }
         },
-        "/serie/getsimmilarserie": {
-            "get": {
-                "summary": "Get Simmilar Serie",
-                "description": "Gets a serie which is simmilar to another serie.",
-                "operationId": "GetSimmilarSerie__get",
-                "paramaters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "User Authentication",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Succesful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "simmilarSerie": "int"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/serie/getepisodes": {
-            "get": {
-                "summary": "Get Serie Episodes",
-                "description": "Gets a serie's episodes.",
-                "operationId": "GetSerieEpisodes__get",
-                "paramaters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "User Authentication",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Succesful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "serieEpisodes": "int"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/episode/add": {
+        "/episode": {
             "post": {
                 "summary": "Add Episode",
                 "description": "Adds a new episode.",
@@ -435,13 +403,11 @@
                         }
                     }
                 }
-            }
-        },
-        "/episode/delete": {
-            "post": {
-                "summary": "Add Episode",
-                "description": "Adds a new episode.",
-                "operationId": "AddEpisode__post",
+            },
+            "delete": {
+                "summary": "Delete episode",
+                "description": "Deletes an existing serie.",
+                "operationId": "DeleteEpisode__delete",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -463,13 +429,11 @@
                         }
                     }
                 }
-            }
-        },
-        "/episode/update": {
-            "post": {
-                "summary": "Update Episode",
-                "description": "Updates an episode.",
-                "operationId": "UpdateEpisode__post",
+            },
+            "patch": {
+                "summary": "Update episode",
+                "description": "Updates an existing episode.",
+                "operationId": "UpdateEpisode__patch",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -485,7 +449,70 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "properties": {}
+                                    "properties": {
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "duration": {
+                                            "type": "int"
+                                        },
+                                        "serie_id": {
+                                            "type": "int"
+                                        },
+                                        "season": {
+                                            "type": "int"
+                                        },
+                                        "filepath": {
+                                            "type": "string"
+                                        }              
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get episode",
+                "description": "Gets an existing episode.",
+                "operationId": "GetEpisode__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    },
+                    {
+                        "name": "episodeId",
+                        "in": "query",
+                        "description": "The ID of the episode."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "duration": {
+                                            "type": "int"
+                                        },
+                                        "serie_id": {
+                                            "type": "int"
+                                        },
+                                        "season": {
+                                            "type": "int"
+                                        },
+                                        "filepath": {
+                                            "type": "string"
+                                        }              
+                                    }
                                 }
                             }
                         }
