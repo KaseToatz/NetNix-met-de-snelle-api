@@ -1,5 +1,6 @@
 import aiomysql
 import asyncio
+import os
 
 from fastapi import FastAPI
 from importlib import import_module
@@ -21,12 +22,16 @@ class App(FastAPI):
         try:
             self.pool = await aiomysql.create_pool(user=self._db.username, password=self._db.password, host=self._db.host, port=self._db.port, db=self._db.database, loop=asyncio.get_event_loop())
         except:
-            pass
+            raise
+        for root, _, files in os.walk("endpoints"):
+            for file in files:
+                if file.endswith(".py"):
+                    self.addEndpoint(os.path.join(root, file).replace("\\", ".")[:-3])
 
     def addEndpoint(self, path: str) -> None:
         module = import_module(path)
-        try:
-            endpoint = module.setup(self)
-            self.add_api_route(endpoint.path, endpoint.callback, response_class=endpoint.responseClass, methods=[endpoint.method.name], name=endpoint.__class__.__qualname__)
-        except:
+        setup = getattr(module, "setup", None)
+        if not setup:
             raise MissingSetupFunction
+        endpoint = setup(self)
+        self.add_api_route(endpoint.path, endpoint.callback, response_class=endpoint.responseClass, methods=[endpoint.method.name], name=endpoint.__class__.__qualname__)
