@@ -12,7 +12,10 @@ class RegisterUser(Endpoint):
                 email = await cursor.fetchone()
                 if email:
                     return JSONResponse({"error": "User with this email already exists."}, 400)
-                await cursor.execute("INSERT INTO Account(email, password, payment_method, banned, subscription, referred_by_account, active) VALUES(%s, %s, %s, %s, %s, %s, %s)", (email, password, None, 0, 0, None, 1))
+                await cursor.execute(
+                    "INSERT INTO Account(email, password, payment_method, banned, subscription, referred_by_account, active) VALUES(%s, %s, %s, %s, %s, %s, %s)",
+                    (email, password, None, 0, 0, None, 1)
+                )
                 return JSONResponse({})
 
 def setup(app: App) -> RegisterUser:
