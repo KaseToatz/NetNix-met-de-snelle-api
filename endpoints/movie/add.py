@@ -5,16 +5,18 @@ from src import App, Endpoint, Method
 
 class AddMovie(Endpoint):
 
-    async def callback(self, title: str = Form(), durration: int = Form(), genre_id: int = Form(), 
-                       filepath: str = Form(), resolution: str = Form()) -> JSONResponse:
+    async def callback(self, title: str = Form(), genre_id: int = Form(), 
+                       filepath: str = Form()) -> JSONResponse:
+        # get duration and resolution from filepath
+        duration = None
+        resolution = None
+
         async with self.pool.acquire() as db:
             async with db.cursor() as cursor:
-                await cursor.execute("SELECT title FROM Movie where movie WHERE title = %s AND durration = %i", (title, durration,))
-                title = await cursor.fetchone()
-                durration = await cursor.fetchone()
-                if title & durration:
+                await cursor.execute("SELECT title FROM Movie where movie WHERE title = %s AND duration = %s", (title, duration))
+                if await cursor.fetchone():
                     return JSONResponse({"error": "This movie already exists."}, 400)
-                await cursor.execute("INSERT INTO Movie(title, durration, genre_id, filepath, resolution) VALUES(%s, %i, %i, %s, %s)", (title, durration, genre_id, filepath, resolution))
+                await cursor.execute("INSERT INTO Movie(title, duration, genre_id, filepath, resolution) VALUES(%s, %s, %s, %s, %s)", (title, duration, genre_id, filepath, resolution))
                 return JSONResponse({})
             
 def setup(app : App) -> AddMovie:
