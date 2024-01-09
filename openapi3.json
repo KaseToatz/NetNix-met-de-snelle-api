@@ -5,7 +5,7 @@
         "version": "0.1.0"
     },
     "paths": {
-        "/user/addprofile": {
+        "/user/profile": {
             "post": {
                 "summary": "Add profile",
                 "description": "Add profile to user.",
@@ -68,13 +68,38 @@
                         }
                     }
                 }
-            }
-        },
-        "/user/editprofile": {
-            "post": {
-                "summary": "Edit profile",
-                "description": "Edit user profile",
-                "operationId": "EditProfile__post",
+            },
+            "delete": {
+                "summary": "Delete Profile",
+                "description": "Delete an existing profile",
+                "operationId": "DeleteProfile_Delete",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Edit Profile",
+                "description": "Edits a profile.",
+                "operationId": "EditProfile__patch",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -133,13 +158,70 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "summary": "Get Profile",
+                "description": "Gets a profile.",
+                "operationId": "GetProfile__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    },
+                    {
+                        "name": "profileId",
+                        "in": "query",
+                        "description": "The ID of the profile."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "age": {
+                                            "type": "string"
+                                        },
+                                        "profilePicture": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        },
+                                        "language": {
+                                            "type": "string"
+                                        },
+                                        "preferences": {
+                                            "type": "object",
+                                            "properties": {
+                                                "genre": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "integer"
+                                                    }
+                                                }
+                                            },
+                                            "nullable": "true"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
-        "/user/addmovietowatchlist": {
+        "/user/watchlist": {
             "post": {
-                "summary": "Add movie to watchlist",
-                "description": "Add movie to watchlist",
-                "operationId": "AddMovieToWatchlist__post",
+                "summary": "Add movie/serie to watchlist",
+                "description": "Add movie/serie to watchlist",
+                "operationId": "AddMovieSerieToWatchlist__post",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -149,7 +231,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Data required for adding a movie to the watchlist",
+                    "description": "Data required for adding a movie/serie to the watchlist",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -176,13 +258,11 @@
                         }
                     }
                 }
-            }
-        },
-        "/user/removemoviefromwatchlist": {
-            "post": {
-                "summary": "Remove movie from watchlist",
-                "description": "Remove movie from watchlist",
-                "operationId": "RemoveMovieFromWatchlist__post",
+            },
+            "delete": {
+                "summary": "Remove movie/serie from watchlist",
+                "description": "Remove movie/serie from watchlist",
+                "operationId": "RemoveMovieSerieFromWatchlist__post",
                 "paramaters": [
                     {
                         "name": "Authorization",
@@ -192,93 +272,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Data required for removing a movie from the watchlist",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "int"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Succesful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/user/addserietowatchlist": {
-            "post": {
-                "summary": "Add serie to watchlist",
-                "description": "Add serie to watchlist",
-                "operationId": "AddSerieToWatchlist__post",
-                "paramaters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "User Authentication",
-                        "required": true
-                    }
-                ],
-                "requestBody": {
-                    "description": "Data required for adding a serie to the watchlist",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "int"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Succesful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/user/removeseriefromwatchlist": {
-            "post": {
-                "summary": "Remove serie from watchlist",
-                "description": "Remove serie from watchlist",
-                "operationId": "RemoveSerieFromWatchlist__post",
-                "paramaters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "User Authentication",
-                        "required": true
-                    }
-                ],
-                "requestBody": {
-                    "description": "Data required for removing a serie from the watchlist",
+                    "description": "Data required for removing a movie/serie from the watchlist",
                     "content": {
                         "application/json": {
                             "schema": {

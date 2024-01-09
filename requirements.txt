@@ -3,3 +3,4 @@ uvicorn
 starlette
 aiomysql
 python-dotenv
+opencv-python
