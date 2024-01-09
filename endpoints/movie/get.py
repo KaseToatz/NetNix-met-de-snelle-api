@@ -3,7 +3,7 @@ from fastapi import Form
 
 from src import App, Endpoint, Method
 
-class DeleteMovie(Endpoint):
+class GetMovie(Endpoint):
 
     async def callback(self, id: int = Form()) -> JSONResponse:
 
@@ -12,8 +12,8 @@ class DeleteMovie(Endpoint):
                 await cursor.execute("SELECT id FROM Movie WHERE id = %s", (id,))
                 if not await cursor.fetchone():
                     return JSONResponse({"error": "This movie does not exist."}, 400)
-                await cursor.execute("DELETE FROM Movie WHERE id = %s", (id,))
+                await cursor.execute("SELECT FROM Movie WHERE id = %s", (id,))
                 return JSONResponse({})
             
-def setup(app : App) -> DeleteMovie:
-    return DeleteMovie(app, Method.DELETE, "/movie/delete", JSONResponse)
+def setup(app : App) -> GetMovie:
+    return GetMovie(app, Method.GET, "/movie/get", JSONResponse)

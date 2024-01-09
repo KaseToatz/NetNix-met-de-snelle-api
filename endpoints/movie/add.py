@@ -20,9 +20,9 @@ class AddMovie(Endpoint):
         else:
             resolution = "SD"
 
-        async with self.pool.acquire() as db:
+        async with self.app.pool.acquire() as db:
             async with db.cursor() as cursor:
-                await cursor.execute("SELECT title FROM Movie where movie WHERE title = %s AND duration = %s", (title, duration))
+                await cursor.execute("SELECT title FROM Movie WHERE title = %s AND duration = %s", (title, duration))
                 if await cursor.fetchone():
                     return JSONResponse({"error": "This movie already exists."}, 400)
                 await cursor.execute("INSERT INTO Movie(title, duration, genre_id, filepath, resolution) VALUES(%s, %s, %s, %s, %s)", (title, duration, genre_id, filepath, resolution))
