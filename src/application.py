@@ -5,6 +5,8 @@ import os
 from fastapi import FastAPI
 from importlib import import_module
 from starlette.middleware.base import BaseHTTPMiddleware
+from passlib.context import CryptContext
+from fastapi.security import OAuth2PasswordBearer
 
 from .exceptions import MissingSetupFunction
 from . import Connection, HTTPMiddleware
@@ -15,6 +17,8 @@ class App(FastAPI):
         super().__init__(title=title, redoc_url=None, root_path="/api/v1")
         self._db = db
         self.pool: aiomysql.Pool = None
+        self.pwdContext = CryptContext(schemes=["bcrypt"])
+        self.oauthScheme = OAuth2PasswordBearer("token")
         self.add_event_handler("startup", self._startup)
         self.add_middleware(BaseHTTPMiddleware, dispatch=HTTPMiddleware(self))
 
@@ -26,7 +30,7 @@ class App(FastAPI):
         for root, _, files in os.walk("endpoints"):
             for file in files:
                 if file.endswith(".py"):
-                    self.addEndpoint(os.path.join(root, file).replace("\\", ".")[:-3])
+                    self.addEndpoint(os.path.join(root, file).replace("\\", ".").replace("/", ".")[:-3])
 
     def addEndpoint(self, path: str) -> None:
         module = import_module(path)

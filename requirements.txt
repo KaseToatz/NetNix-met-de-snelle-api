@@ -3,3 +3,6 @@ uvicorn
 starlette
 aiomysql
 python-dotenv
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
