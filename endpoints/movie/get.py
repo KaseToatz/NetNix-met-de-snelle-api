@@ -12,8 +12,9 @@ class GetMovie(Endpoint):
                 await cursor.execute("SELECT id FROM Movie WHERE id = %s", (id,))
                 if not await cursor.fetchone():
                     return JSONResponse({"error": "This movie does not exist."}, 400)
-                await cursor.execute("SELECT FROM Movie WHERE id = %s", (id,))
-                return JSONResponse({})
+                await cursor.execute("SELECT * FROM Movie WHERE id = %s", (id,))
+                _, title, duration, genreId, filepath, resolution = await cursor.fetchone()
+                return JSONResponse({"id": id, "title": title, "duration": duration, "genre_id": genreId, "filepath": filepath, "resolution": resolution})
             
 def setup(app : App) -> GetMovie:
     return GetMovie(app, Method.GET, "/movie/get", JSONResponse)
