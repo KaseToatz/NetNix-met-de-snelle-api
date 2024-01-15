@@ -12,8 +12,9 @@ class GetSerie(Endpoint):
                 await cursor.execute("SELECT id FROM Serie WHERE id = %s", (id,))
                 if not await cursor.fetchone():
                     return JSONResponse({"error": "This serie does not exist."}, 400)
-                await cursor.execute("SELECT FROM Serie WHERE id = %s", (id,))
-                return JSONResponse({})
+                await cursor.execute("SELECT * FROM Serie WHERE id = %s", (id,))
+                _, title, genre_id, resolution = await cursor.fetchone()
+                return JSONResponse({"id": id, "title": title, "genre_id": genre_id, "resolution": resolution})
             
 def setup(app : App) -> GetSerie:
     return GetSerie(app, Method.GET, "/serie/get", JSONResponse)

@@ -9,10 +9,12 @@ class PatchSerie(Endpoint):
 
         async with self.app.pool.acquire() as db:
             async with db.cursor() as cursor:
-                await cursor.execute("SELECT id FROM Serie WHERE id = %s", (id,))
-                if not await cursor.fetchone():
+                await cursor.execute("SELECT title, genre_id, resolution FROM Serie WHERE id = %s", (id,))
+                serie = await cursor.fetchone()
+                if not serie:
                     return JSONResponse({"error": "This serie does not exist."}, 400)
-                await cursor.execute("UPDATE Serie SET title = %s, genre_id = %s, resolution = %s WHERE id = %s", (title, genre_id, resolution, id))
+                dbtitle, dbgenre_id, dbresolution = await cursor.fetchone() 
+                await cursor.execute("UPDATE Serie SET title = %s, genre_id = %s, resolution = %s WHERE id = %s", (title or dbtitle, genre_id or dbgenre_id, resolution or dbresolution, id))
                 return JSONResponse({})
             
 def setup(app : App) -> PatchSerie:
