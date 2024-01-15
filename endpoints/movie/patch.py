@@ -17,8 +17,8 @@ class PatchMovie(Endpoint):
                     return JSONResponse({"error": "This movie does not exist."}, 400)
                 dbtitle, duration, dbfilepath, dbgenre_id, resolution = await cursor.fetchone()
                 if filepath != dbfilepath:
-                    duration = int(cv2.VideoCapture(filepath).get(cv2.CAP_PROP_POS_MSEC) / 1000)
-                    height = cv2.VideoCapture(filepath).get(cv2.CAP_PROP_FRAME_WIDTH)
+                    duration = int(cv2.VideoCapture(dbfilepath).get(cv2.CAP_PROP_POS_MSEC) / 1000)
+                    height = cv2.VideoCapture(dbfilepath).get(cv2.CAP_PROP_FRAME_WIDTH)
                     if height >= 2160:
                         resolution = "UHD"
                     elif height >= 1440:
