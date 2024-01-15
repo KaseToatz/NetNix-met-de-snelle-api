@@ -11,7 +11,6 @@ SIGNING_KEY = "5c4215af1d278962457562717b41fc3061671d1981e07ee37fd20afa5d5ca08c"
 class RegisterUser(Endpoint):
     
     async def callback(self, email: str = Form(), password: str = Form()) -> JSONResponse:
-        print(f"email: {email}\npassword: {password}\nhacked lmao")
         async with self.app.pool.acquire() as db:
             async with db.cursor() as cursor:
                 await cursor.execute("SELECT email, password FROM Account WHERE email = %s", (email,))
