@@ -1,4 +1,5 @@
 import datetime
+import os
 
 from fastapi.responses import JSONResponse
 from fastapi import Form
@@ -6,7 +7,7 @@ from jose import jwt
 
 from src import App, Endpoint, Method
 
-SIGNING_KEY = "5c4215af1d278962457562717b41fc3061671d1981e07ee37fd20afa5d5ca08c"
+SIGNING_KEY = os.getenv("SIGNING_KEY")
 
 class LoginUser(Endpoint):
     
