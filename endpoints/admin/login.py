@@ -18,6 +18,7 @@ class LoginAdmin(Endpoint):
                 result = await cursor.fetchone()
                 if not result:
                     return JSONResponse({"error": "User with this email does not exist."}, 400)
+                print(result)
                 if not self.app.pwdContext.verify(password, result[1]):
                     return JSONResponse({"error": "Password does not match."}, 401)
                 return JSONResponse({"token": jwt.encode({"sub": result[0], "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=24)}, SIGNING_KEY)})
