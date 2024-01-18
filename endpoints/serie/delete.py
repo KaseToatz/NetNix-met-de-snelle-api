@@ -9,7 +9,7 @@ class DeleteSerie(Endpoint):
 
         async with self.app.pool.acquire() as db:
             async with db.cursor() as cursor:
-                await cursor.execute("SELECT id FROM Movie WHERE id = %s", (id,))
+                await cursor.execute("SELECT id FROM Serie WHERE id = %s", (id,))
                 if not await cursor.fetchone():
                     return JSONResponse({"error": "This serie does not exist."}, 400)
                 await cursor.execute("DELETE FROM Serie WHERE id = %s", (id,))
