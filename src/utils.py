@@ -1,7 +1,13 @@
+import os
+import datetime
+
 from fastapi import Request
-from typing import Coroutine, Any
+from typing import Coroutine, Any, Callable
+from jose import jwt
 
 from .exceptions import DatabaseNotConnected
+
+SIGNING_KEY = os.getenv("SIGNING_KEY")
 
 class HTTPMiddleware:
 
@@ -22,3 +28,7 @@ class Connection:
         self.host = host
         self.port = port
         self.database = database
+
+async def isAuthorized(token: str, check: Callable[[str], bool]) -> bool:
+    data = jwt.decode(token, SIGNING_KEY, algorithms=["bcrypt"])
+    return datetime.datetime.fromtimestamp(data["exp"]) > datetime.datetime.utcnow() and check(data["sub"])
