@@ -5,7 +5,7 @@ from src import App, Endpoint, Method
 
 class GetAllSeries(Endpoint):
 
-    async def callback(self,) -> JSONResponse:
+    async def callback(self) -> JSONResponse:
 
         async with self.app.pool.acquire() as db:
             async with db.cursor() as cursor:
