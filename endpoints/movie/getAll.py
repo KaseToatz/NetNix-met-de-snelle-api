@@ -3,9 +3,9 @@ from fastapi import Form
 
 from src import App, Endpoint, Method
 
-class GetMovie(Endpoint):
+class GetAllMovies(Endpoint):
 
-    async def callback(self, id: int = Form()) -> JSONResponse:
+    async def callback(self,) -> JSONResponse:
 
         async with self.app.pool.acquire() as db:
             async with db.cursor() as cursor:
@@ -13,8 +13,8 @@ class GetMovie(Endpoint):
                 movies = await cursor.fetchall()
                 if not movies:
                     return JSONResponse({"error": "There aren't any movies yet."}, 400)
-                movies_list = [{"id": movie[0], "title": movie[1]} for movie in movies]
-                return JSONResponse({movies_list})
+                movie_list = [{"id": movie[0], "title": movie[1]} for movie in movies]
+                return JSONResponse({movie_list})
             
-def setup(app : App) -> GetMovie:
-    return GetMovie(app, Method.GET, "/movies/get", JSONResponse)
+def setup(app : App) -> GetAllMovies:
+    return GetAllMovies(app, Method.GET, "/movie/getAll", JSONResponse)
