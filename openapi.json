@@ -1036,6 +1036,733 @@
                     }
                 }
             }
+        },
+        "/subscription": {
+            "post": {
+                "summary": "Add Subscribtion",
+                "description": "Adds a new subscription type.",
+                "operationId": "AddSubscription__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for ading a new subscription type.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "description": {
+                                        "type": "string"
+                                    },   
+                                    "subscription_price": {
+                                        "type": "float"
+                                    }          
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete subscription",
+                "description": "Deletes an existing subscription type.",
+                "operationId": "DeleteSubscription__delete",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Subscription",
+                "description": "Updates an existing subscription type.",
+                "operationId": "UpdateSubscription__patch",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "subscription_price": {
+                                            "type": "float"
+                                        }            
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Subscription",
+                "description": "Gets an existing subscription type.",
+                "operationId": "GetSubscription__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    },
+                    {
+                        "name": "subscriptionId",
+                        "in": "query",
+                        "description": "The ID of the subscription."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "subscription_price": {
+                                            "type": "float"
+                                        }             
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/preference": {
+            "post": {
+                "summary": "Add preference",
+                "description": "Adds a new preference.",
+                "operationId": "AddPreferencew__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for ading a new preference.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "profile_id": {
+                                        "type": "int"
+                                    }  
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete preference",
+                "description": "Deletes an existing preference.",
+                "operationId": "DeletePreference__delete",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update preference",
+                "description": "Updates an existing preference.",
+                "operationId": "UpdatePreference__patch",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "profile_id": {
+                                            "type": "int"
+                                        },
+                                        "genre_ids": {
+                                            "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                        },
+                                        "viewer_guide_ids": {
+                                            "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                        }             
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get preference",
+                "description": "Gets an existing preference.",
+                "operationId": "GetEpisode__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    },
+                    {
+                        "name": "preferenceId",
+                        "in": "query",
+                        "description": "The ID of the preference."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "profile_id": {
+                                            "type": "int"
+                                        },
+                                        "genre_ids": {
+                                            "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                        },
+                                        "viewer_guide_ids": {
+                                            "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                        }              
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/viewerGuide": {
+            "post": {
+                "summary": "Add ViewerGuide",
+                "description": "Adds a new viewer guide.",
+                "operationId": "AddViewerGuide__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for ading a new viewer guide.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "description": {
+                                        "type": "string"
+                                    }            
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete ViewerGuide",
+                "description": "Deletes an existing viewer guide.",
+                "operationId": "DeleteViewerGuide__delete",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update ViewerGuide",
+                "description": "Updates an existing viewer guide.",
+                "operationId": "UpdateViewerGuide__patch",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }             
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get ViewerGuide",
+                "description": "Gets an existing viewer guide.",
+                "operationId": "GetViewerGuide__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    },
+                    {
+                        "name": "viewerGuideId",
+                        "in": "query",
+                        "description": "The ID of the viewer guide."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }              
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/genre": {
+            "post": {
+                "summary": "Add Genre",
+                "description": "Adds a new genre.",
+                "operationId": "AddGenre__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for ading a new genre.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "description": {
+                                        "type": "string"
+                                    }             
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Genre",
+                "description": "Deletes an existing genre.",
+                "operationId": "DeleteGenre__delete",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Genre",
+                "description": "Updates an existing genre.",
+                "operationId": "UpdateGenre__patch",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }             
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Genre",
+                "description": "Gets an existing genre.",
+                "operationId": "GetGenre__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    },
+                    {
+                        "name": "genreId",
+                        "in": "query",
+                        "description": "The ID of the genre."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }             
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/watchlist": {
+            "post": {
+                "summary": "Add Watchlist",
+                "description": "Adds a new watchlist.",
+                "operationId": "AddWatchlist__post",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data required for ading a new watchlist.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "profile_id": {
+                                        "type": "int"
+                                    }            
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Watchlist",
+                "description": "Deletes an existing watchlist.",
+                "operationId": "DeletWatchlist__delete",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Watchlist",
+                "description": "Updates an existing watchlist.",
+                "operationId": "UpdateWatchlist__patch",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "serie_ids": {
+                                            "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                        },
+                                        "movie_ids": {
+                                            "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                        }            
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Watchlist",
+                "description": "Gets an existing watchlist.",
+                "operationId": "GetWatchlist__get",
+                "paramaters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Authentication",
+                        "required": true
+                    },
+                    {
+                        "name": "watchlistId",
+                        "in": "query",
+                        "description": "The ID of the watchlist."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "profile_id": {
+                                            "type": "int"
+                                        },
+                                        "serie_ids": {
+                                            "type": "array",
+                                                "items": {
+                                                    "type": "int"
+                                                }
+                                        },
+                                        "movie_ids": {
+                                            "type": "array",
+                                                "items": {
+                                                    "type": "int"
+                                                }
+                                        }             
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
