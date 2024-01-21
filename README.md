@@ -1,2 +1,2 @@
-# NetNix-met-de-snelle-api
+# NetNixApi
 FastAPI REST API for a Netflix clone for a school project
