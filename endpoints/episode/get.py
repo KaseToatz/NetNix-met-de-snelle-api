@@ -1,20 +1,29 @@
 from fastapi.responses import JSONResponse
-from fastapi import Form
+from fastapi import Request
+from aiomysql.cursors import DictCursor
 
-from src import Endpoint, Method
+from src import Endpoint, Method, Connection
 
-class GetEpisode(Endpoint):
+class GetMovie(Endpoint):
 
-    async def callback(self, id: int = Form()) -> JSONResponse:
-
-        async with self.app.pool.acquire() as db:
-            async with db.cursor() as cursor:
-                await cursor.execute("SELECT id FROM Episode WHERE id = %s", (id,))
-                if not await cursor.fetchone():
-                    return JSONResponse({"error": "This episode does not exist."}, 400)
-                await cursor.execute("SELECT * FROM Episode WHERE id = %s", (id,))
-                _, title, duration, serie_id, season, filepath = await cursor.fetchone()
-                return JSONResponse({"id": id, "title": title, "duration": duration, "serie_id": serie_id, "season": season, "filepath": filepath})
+    async def callback(self, request: Request, serie_id : int | None = None, id: int | None = None) -> JSONResponse:
+        if auth := await self.getAuthorization(request.headers.get("Authorization", None), True):
+            if not serie_id and not id:
+                JSONResponse({"error": "ID and Serie_ID can't both be none"})
+            async with Connection(auth.usertype) as db:
+                async with db.cursor(DictCursor) as cursor:
+                    if id:
+                        await cursor.execute("SELECT * FROM Movie WHERE id = %s", (id,))
+                        result = await cursor.fetchone()
+                        if not result:
+                            return JSONResponse({"error": "This movie does not exist."}, 400)
+                    else:
+                        await cursor.callproc("get_episodes_from_serie", (serie_id))
+                        result = await cursor.fetchall()
+                        if not result:
+                            return JSONResponse({"error": "No episodes found or serie does not exist."}, 400)
+                    return JSONResponse(result)
+        return JSONResponse({"error": "User is not permitted to view this content."}, 401)
             
-def setup() -> GetEpisode:
-    return GetEpisode(Method.GET, "/episode/get", JSONResponse)
+def setup() -> GetMovie:
+    return GetMovie(Method.GET, "/movie/get", JSONResponse)
