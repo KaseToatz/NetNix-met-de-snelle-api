@@ -26,4 +26,4 @@ class GetMovie(Endpoint):
         return JSONResponse({"error": "User is not permitted to view this content."}, 401)
             
 def setup() -> GetMovie:
-    return GetMovie(Method.GET, "/movie/get", JSONResponse)
+    return GetMovie(Method.GET, "/episode/get", JSONResponse)
