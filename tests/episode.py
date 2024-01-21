@@ -20,6 +20,10 @@ class SerieTest(unittest.TestCase):
     def testEpisodeGetShouldReturn400(self) -> None:
         request = requests.get("https://netnix.xyz/api/v1/episode/get?id=129", headers={"Authorization": f"Bearer {token}"})
         self.assertEquals(request.status_code, 400)  
+    
+    def testEpisodeGetShouldReturn400_2(self) -> None:
+        request = requests.get("https://netnix.xyz/api/v1/episode/get", headers={"Authorization": f"Bearer {token}"})
+        self.assertEquals(request.status_code, 400)  
 
 if __name__ == "__main__":
     unittest.main()

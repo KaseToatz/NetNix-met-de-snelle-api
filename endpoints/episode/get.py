@@ -9,7 +9,7 @@ class GetMovie(Endpoint):
     async def callback(self, request: Request, serie_id : int | None = None, id: int | None = None) -> JSONResponse:
         if auth := await self.getAuthorization(request.headers.get("Authorization", None), True):
             if not serie_id and not id:
-                JSONResponse({"error": "ID and Serie_ID can't both be none"})
+                JSONResponse({"error": "ID and Serie_ID can't both be none"}, 400)
             async with Connection(auth.usertype) as db:
                 async with db.cursor(DictCursor) as cursor:
                     if id:
