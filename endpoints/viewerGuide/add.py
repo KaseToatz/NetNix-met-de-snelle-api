@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class AddViewerGuide(Endpoint):
 
@@ -15,5 +15,5 @@ class AddViewerGuide(Endpoint):
                 await cursor.execute("INSERT INTO ViewerGuide(description) VALUES(%s)", (description))
                 return JSONResponse({})
             
-def setup(app : App) -> AddViewerGuide:
-    return AddViewerGuide(app, Method.POST, "/viewerGuide/add", JSONResponse)
+def setup() -> AddViewerGuide:
+    return AddViewerGuide(Method.POST, "/viewerGuide/add", JSONResponse)

@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class DeleteSubtitle(Endpoint):
 
@@ -15,5 +15,5 @@ class DeleteSubtitle(Endpoint):
                 await cursor.execute("DELETE FROM subtitle WHERE id = %s", (id,))
                 return JSONResponse({})
             
-def setup(app : App) -> DeleteSubtitle:
-    return DeleteSubtitle(app, Method.DELETE, "/subtitle/delete", JSONResponse)
+def setup() -> DeleteSubtitle:
+    return DeleteSubtitle(Method.DELETE, "/subtitle/delete", JSONResponse)

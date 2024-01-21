@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class GetGenre(Endpoint):
 
@@ -16,5 +16,5 @@ class GetGenre(Endpoint):
                 _, description = await cursor.fetchone()
                 return JSONResponse({"id": id, "description": description})
             
-def setup(app : App) -> GetGenre:
-    return GetGenre(app, Method.GET, "/serie/get", JSONResponse)
+def setup() -> GetGenre:
+    return GetGenre(Method.GET, "/serie/get", JSONResponse)

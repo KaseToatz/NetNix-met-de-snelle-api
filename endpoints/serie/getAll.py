@@ -1,7 +1,6 @@
 from fastapi.responses import JSONResponse
-from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class GetAllSeries(Endpoint):
 
@@ -16,5 +15,5 @@ class GetAllSeries(Endpoint):
                 serie_list = [{"id": serie[0], "title": serie[1]} for serie in series]
                 return JSONResponse({serie_list})
             
-def setup(app : App) -> GetAllSeries:
-    return GetAllSeries(app, Method.GET, "/serie/getAll", JSONResponse)
+def setup() -> GetAllSeries:
+    return GetAllSeries(Method.GET, "/serie/getAll", JSONResponse)

@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class PatchViewerGuide(Endpoint):
 
@@ -17,5 +17,5 @@ class PatchViewerGuide(Endpoint):
                 await cursor.execute("UPDATE ViewerGuide SET description = %s WHERE id = %s", (description or dbdescription, id))
                 return JSONResponse({})
             
-def setup(app : App) -> PatchViewerGuide:
-    return PatchViewerGuide(app, Method.PATCH, "/viewerGuide/patch", JSONResponse)
+def setup() -> PatchViewerGuide:
+    return PatchViewerGuide(Method.PATCH, "/viewerGuide/patch", JSONResponse)

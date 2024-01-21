@@ -11,4 +11,4 @@ class UserType(Enum):
     JUNIOR = 0
     MEDIOR = 1
     SENIOR = 2
-    DEFAULT = 0
+    DEFAULT = 3

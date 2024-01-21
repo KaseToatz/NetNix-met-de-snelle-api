@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class PatchSerie(Endpoint):
 
@@ -17,5 +17,5 @@ class PatchSerie(Endpoint):
                 await cursor.execute("UPDATE Serie SET title = %s, genre_id = %s, resolution = %s WHERE id = %s", (title or dbtitle, genre_id or dbgenre_id, resolution or dbresolution, id))
                 return JSONResponse({})
             
-def setup(app : App) -> PatchSerie:
-    return PatchSerie(app, Method.PATCH, "/serie/patch", JSONResponse)
+def setup() -> PatchSerie:
+    return PatchSerie(Method.PATCH, "/serie/patch", JSONResponse)

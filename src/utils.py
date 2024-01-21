@@ -1,10 +1,6 @@
 import aiomysql
 import os
 
-from fastapi import Request
-from typing import Coroutine, Any
-
-from .exceptions import DatabaseNotConnected
 from .enums import UserType
 
 DB_USER = os.getenv("DB_USER")
@@ -16,17 +12,6 @@ DB_MEDIOR = os.getenv("DB_MEDIOR")
 DB_MEDIORPASSWORD = os.getenv("DB_MEDIORPASSWORD")
 DB_SENIOR = os.getenv("DB_SENIOR")
 DB_SENIORPASSWORD = os.getenv("DB_SENIORPASSWORD")
-
-class HTTPMiddleware:
-
-    def __init__(self, app) -> None:
-        self.app = app
-
-    async def __call__(self, request: Request, callNext: Coroutine) -> Any:
-        if not self.app.pool:
-            raise DatabaseNotConnected
-        else:
-            return await callNext(request)
 
 class Connection:
 
@@ -47,7 +32,9 @@ class Connection:
         self.connection: aiomysql.Connection = None
 
     async def __aenter__(self) -> aiomysql.Connection:
-        self.connection = await aiomysql.connect("127.0.0.1", self.username, self.password, DB_NAME)
+        print(DB_USER)
+        print(DB_PASSWORD)
+        self.connection = await aiomysql.connect("192.168.1.100", self.username, self.password, DB_NAME)
         return self.connection
     
     async def __aexit__(self, *args) -> None:

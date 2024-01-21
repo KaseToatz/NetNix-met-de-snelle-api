@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class AddGenre(Endpoint):
 
@@ -15,5 +15,5 @@ class AddGenre(Endpoint):
                 await cursor.execute("INSERT INTO Genre(description) VALUES(%s)", (description))
                 return JSONResponse({})
             
-def setup(app : App) -> AddGenre:
-    return AddGenre(app, Method.POST, "/genre/add", JSONResponse)
+def setup() -> AddGenre:
+    return AddGenre(Method.POST, "/genre/add", JSONResponse)

@@ -2,19 +2,14 @@ import os
 
 from fastapi import FastAPI
 from importlib import import_module
-from starlette.middleware.base import BaseHTTPMiddleware
-from passlib.context import CryptContext
 
 from .exceptions import MissingSetupFunction
-from . import HTTPMiddleware
 
 class App(FastAPI):
 
     def __init__(self, title: str) -> None:
         super().__init__(title=title, redoc_url=None, root_path="/api/v1")
-        self.pwdContext = CryptContext(schemes=["bcrypt"])
         self.add_event_handler("startup", self._startup)
-        self.add_middleware(BaseHTTPMiddleware, dispatch=HTTPMiddleware(self))
 
     async def _startup(self) -> None:
         for root, _, files in os.walk("endpoints"):

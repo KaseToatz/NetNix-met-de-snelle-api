@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class AddProfile(Endpoint):
 
@@ -15,5 +15,5 @@ class AddProfile(Endpoint):
                 await cursor.execute("INSERT INTO Profile(account_id, name, age, image_filepath, language) VALUES(%s, %s, %s, %s, %s)", (account_id, name, age, image_filepath, language))
                 return JSONResponse({})
             
-def setup(app : App) -> AddProfile:
-    return AddProfile(app, Method.POST, "/profile/add", JSONResponse)
+def setup() -> AddProfile:
+    return AddProfile(Method.POST, "/profile/add", JSONResponse)

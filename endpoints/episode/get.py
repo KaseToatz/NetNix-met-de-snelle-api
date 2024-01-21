@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class GetEpisode(Endpoint):
 
@@ -16,5 +16,5 @@ class GetEpisode(Endpoint):
                 _, title, duration, serie_id, season, filepath = await cursor.fetchone()
                 return JSONResponse({"id": id, "title": title, "duration": duration, "serie_id": serie_id, "season": season, "filepath": filepath})
             
-def setup(app : App) -> GetEpisode:
-    return GetEpisode(app, Method.GET, "/episode/get", JSONResponse)
+def setup() -> GetEpisode:
+    return GetEpisode(Method.GET, "/episode/get", JSONResponse)

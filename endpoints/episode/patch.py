@@ -3,7 +3,7 @@ import cv2
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class PatchEpisode(Endpoint):
 
@@ -21,5 +21,5 @@ class PatchEpisode(Endpoint):
                 await cursor.execute("UPDATE Episode SET title = %s, duration = %s, serie_id = %s, season = %s, filepath = %s WHERE id = %s", (title or dbtitle, duration, serie_id or dbserie_id, season or dbseason, filepath or dbfilepath, id))
                 return JSONResponse({})
             
-def setup(app : App) -> PatchEpisode:
-    return PatchEpisode(app, Method.PATCH, "/episode/patch", JSONResponse)
+def setup() -> PatchEpisode:
+    return PatchEpisode(Method.PATCH, "/episode/patch", JSONResponse)

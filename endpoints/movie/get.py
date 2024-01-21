@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class GetMovie(Endpoint):
 
@@ -16,5 +16,5 @@ class GetMovie(Endpoint):
                 _, title, duration, genreId, filepath, resolution = await cursor.fetchone()
                 return JSONResponse({"id": id, "title": title, "duration": duration, "genre_id": genreId, "filepath": filepath, "resolution": resolution})
             
-def setup(app : App) -> GetMovie:
-    return GetMovie(app, Method.GET, "/movie/get", JSONResponse)
+def setup() -> GetMovie:
+    return GetMovie(Method.GET, "/movie/get", JSONResponse)

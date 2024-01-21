@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class GetAllMovies(Endpoint):
 
@@ -16,5 +16,5 @@ class GetAllMovies(Endpoint):
                 movie_list = [{"id": movie[0], "title": movie[1]} for movie in movies]
                 return JSONResponse(movie_list)
             
-def setup(app : App) -> GetAllMovies:
-    return GetAllMovies(app, Method.GET, "/movie/getAll", JSONResponse)
+def setup() -> GetAllMovies:
+    return GetAllMovies(Method.GET, "/movie/getAll", JSONResponse)

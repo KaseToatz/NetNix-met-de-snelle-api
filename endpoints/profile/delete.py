@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class DeleteProfile(Endpoint):
 
@@ -15,5 +15,5 @@ class DeleteProfile(Endpoint):
                 await cursor.execute("DELETE FROM Profile WHERE id = %s", (id,))
                 return JSONResponse({})
             
-def setup(app : App) -> DeleteProfile:
-    return DeleteProfile(app, Method.DELETE, "/profile/delete", JSONResponse)
+def setup() -> DeleteProfile:
+    return DeleteProfile(Method.DELETE, "/profile/delete", JSONResponse)

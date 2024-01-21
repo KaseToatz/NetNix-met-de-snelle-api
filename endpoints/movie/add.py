@@ -2,7 +2,7 @@ from fastapi.responses import JSONResponse
 from fastapi import Form
 import cv2
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class AddMovie(Endpoint):
 
@@ -28,5 +28,5 @@ class AddMovie(Endpoint):
                 await cursor.execute("INSERT INTO Movie(title, duration, genre_id, filepath, resolution) VALUES(%s, %s, %s, %s, %s)", (title, duration, genre_id, filepath, resolution))
                 return JSONResponse({})
             
-def setup(app : App) -> AddMovie:
-    return AddMovie(app, Method.POST, "/movie/add", JSONResponse)
+def setup() -> AddMovie:
+    return AddMovie(Method.POST, "/movie/add", JSONResponse)

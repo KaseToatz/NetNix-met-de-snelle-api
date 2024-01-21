@@ -32,5 +32,5 @@ class PatchMovie(Endpoint):
                 await cursor.execute("UPDATE Movie SET title = %s, duration = %s, filepath = %s, genre_id = %s, resolution = %s WHERE id = %s", (title or dbtitle, duration, filepath or dbfilepath, genre_id or dbgenre_id, resolution, id))
                 return JSONResponse({})
             
-def setup(app : App) -> PatchMovie:
-    return PatchMovie(app, Method.PATCH, "/movie/patch", JSONResponse)
+def setup() -> PatchMovie:
+    return PatchMovie(Method.PATCH, "/movie/patch", JSONResponse)

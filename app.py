@@ -3,9 +3,9 @@ import uvicorn
 from argparse import ArgumentParser
 from dotenv import load_dotenv
 
-from src import App
-
 load_dotenv()
+
+from src import App
 
 app = App("NetNix")
 

@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class PatchSubtitle(Endpoint):
 
@@ -17,5 +17,5 @@ class PatchSubtitle(Endpoint):
                 await cursor.execute("UPDATE Subtitle SET filepath, language, movie_id, serie_id WHERE id = %s", (filepath or dbfilepath, language or dblanguage, movie_id or dbmovie_id, serie_id or dbserie_id, id))
                 return JSONResponse({})
             
-def setup(app : App) -> PatchSubtitle:
-    return PatchSubtitle(app, Method.PATCH, "/subtitle/patch", JSONResponse)
+def setup() -> PatchSubtitle:
+    return PatchSubtitle(Method.PATCH, "/subtitle/patch", JSONResponse)

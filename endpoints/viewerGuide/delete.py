@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class DeleteViewerGuide(Endpoint):
 
@@ -15,5 +15,5 @@ class DeleteViewerGuide(Endpoint):
                 await cursor.execute("DELETE FROM ViewerGuide WHERE id = %s", (id,))
                 return JSONResponse({})
             
-def setup(app : App) -> DeleteViewerGuide:
-    return DeleteViewerGuide(app, Method.DELETE, "/viewerGuide/delete", JSONResponse)
+def setup() -> DeleteViewerGuide:
+    return DeleteViewerGuide(Method.DELETE, "/viewerGuide/delete", JSONResponse)

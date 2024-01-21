@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class PatchProfile(Endpoint):
 
@@ -17,5 +17,5 @@ class PatchProfile(Endpoint):
                 await cursor.execute("UPDATE Profile SET name = %s, age = %s, image_filepath = %s, language = %s WHERE id = %s", (name or dbname, age or dbage, image_filepath or dbimage_filepath, language or dblanguage, id))
                 return JSONResponse({})
             
-def setup(app : App) -> PatchProfile:
-    return PatchProfile(app, Method.PATCH, "/profile/patch", JSONResponse)
+def setup() -> PatchProfile:
+    return PatchProfile(Method.PATCH, "/profile/patch", JSONResponse)

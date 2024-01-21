@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class AddSerie(Endpoint):
 
@@ -15,5 +15,5 @@ class AddSerie(Endpoint):
                 await cursor.execute("INSERT INTO Serie(title, genre_id, resolution) VALUES(%s, %s, %s)", (title, genre_id, resolution))
                 return JSONResponse({})
             
-def setup(app : App) -> AddSerie:
-    return AddSerie(app, Method.POST, "/serie/add", JSONResponse)
+def setup() -> AddSerie:
+    return AddSerie(Method.POST, "/serie/add", JSONResponse)

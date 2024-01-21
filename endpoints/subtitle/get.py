@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class GetSubtitle(Endpoint):
 
@@ -16,5 +16,5 @@ class GetSubtitle(Endpoint):
                 _, filepath, language, movie_id, serie_id = await cursor.fetchone()
                 return JSONResponse({"id": id, "filepath": filepath, "language": language, "movie_id": movie_id, "serie_id": serie_id})
             
-def setup(app : App) -> GetSubtitle:
-    return GetSubtitle(app, Method.GET, "/subtitle/get", JSONResponse)
+def setup() -> GetSubtitle:
+    return GetSubtitle(Method.GET, "/subtitle/get", JSONResponse)

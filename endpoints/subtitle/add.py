@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class AddSubtitle(Endpoint):
 
@@ -15,5 +15,5 @@ class AddSubtitle(Endpoint):
                 await cursor.execute("INSERT INTO Subtitle(filepath, language, movie_id, serie_id) VALUES(%s, %s, %s, %s)", (filepath, language, movie_id, serie_id))
                 return JSONResponse({})
             
-def setup(app : App) -> AddSubtitle:
-    return AddSubtitle(app, Method.POST, "/subtitle/add", JSONResponse)
+def setup() -> AddSubtitle:
+    return AddSubtitle(Method.POST, "/subtitle/add", JSONResponse)

@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class GetProfile(Endpoint):
 
@@ -16,5 +16,5 @@ class GetProfile(Endpoint):
                 _, account_id, name, age, image_filepath, language = await cursor.fetchone()
                 return JSONResponse({"id": id, "account_id": account_id, "name": name, "age": age, "image_filepath": image_filepath, "language": language})
             
-def setup(app : App) -> GetProfile:
-    return GetProfile(app, Method.GET, "/profile/get", JSONResponse)
+def setup() -> GetProfile:
+    return GetProfile(Method.GET, "/profile/get", JSONResponse)

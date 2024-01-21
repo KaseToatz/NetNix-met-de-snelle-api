@@ -1,7 +1,7 @@
 from fastapi.responses import JSONResponse
 from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method
 
 class GetViewerGuide(Endpoint):
 
@@ -16,5 +16,5 @@ class GetViewerGuide(Endpoint):
                 _, description = await cursor.fetchone()
                 return JSONResponse({"id": id, "description": description})
             
-def setup(app : App) -> GetViewerGuide:
-    return GetViewerGuide(app, Method.GET, "/viewerGuide/get", JSONResponse)
+def setup() -> GetViewerGuide:
+    return GetViewerGuide(Method.GET, "/viewerGuide/get", JSONResponse)
