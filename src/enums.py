@@ -8,7 +8,7 @@ class Method(Enum):
     PATCH = 4
 
 class UserType(Enum):
-    JUNIOR = 0
-    MEDIOR = 1
-    SENIOR = 2
-    DEFAULT = 3
+    SENIOR = 1
+    MEDIOR = 2
+    JUNIOR = 3
+    DEFAULT = 4

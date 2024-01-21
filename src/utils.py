@@ -32,10 +32,14 @@ class Connection:
         self.connection: aiomysql.Connection = None
 
     async def __aenter__(self) -> aiomysql.Connection:
-        print(DB_USER)
-        print(DB_PASSWORD)
         self.connection = await aiomysql.connect("192.168.1.100", self.username, self.password, DB_NAME)
         return self.connection
     
     async def __aexit__(self, *args) -> None:
         self.connection.close()
+
+class Authorization:
+
+    def __init__(self, email: str, usertype: UserType) -> None:
+        self.email = email
+        self.usertype = usertype

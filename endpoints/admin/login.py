@@ -14,7 +14,7 @@ class LoginAdmin(Endpoint):
     async def callback(self, email: str = Form(), password: str = Form()) -> JSONResponse:
         async with Connection() as db:
             async with db.cursor() as cursor:
-                await cursor.execute("SELECT email, password FROM Admin WHERE email = %s", (email,))
+                await cursor.callproc("admin_login", (email,))
                 result = await cursor.fetchone()
                 if not result:
                     return JSONResponse({"error": "Admin with this email does not exist."}, 400)
