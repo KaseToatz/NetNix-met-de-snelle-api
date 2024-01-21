@@ -1,13 +1,12 @@
 from fastapi.responses import JSONResponse
-from fastapi import Form
 
-from src import App, Endpoint, Method
+from src import Endpoint, Method, Connection, UserType
 
 class GetMonthlyProfits(Endpoint):
 
     async def callback(self) -> JSONResponse:
 
-        async with self.app.pool.acquire() as db:
+        async with Connection(UserType.JUNIOR) as db:
             async with db.cursor() as cursor:
                 await cursor.execute("SELECT Subscription, referd_by_acount FROM Acount")
                 acounts = await cursor.fetchall()
@@ -29,5 +28,5 @@ class GetMonthlyProfits(Endpoint):
 
                 return JSONResponse({profits})
             
-def setup(app : App) -> GetMonthlyProfits:
-    return GetMonthlyProfits(app, Method.GET, "/user/getMonthlyProfits", JSONResponse)
+def setup() -> GetMonthlyProfits:
+    return GetMonthlyProfits(Method.GET, "/user/getMonthlyProfits", JSONResponse)

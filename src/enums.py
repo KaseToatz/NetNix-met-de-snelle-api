@@ -6,3 +6,9 @@ class Method(Enum):
     PUT = 2
     DELETE = 3
     PATCH = 4
+
+class UserType(Enum):
+    JUNIOR = 0
+    MEDIOR = 1
+    SENIOR = 2
+    DEFAULT = 0
