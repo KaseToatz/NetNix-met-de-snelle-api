@@ -6,7 +6,7 @@ class SerieTest(unittest.TestCase):
 
     def testEpisodeGetShouldReturnAllEpisodeFromSerie(self) -> None:
         request = requests.get("https://netnix.xyz/api/v1/episode/get?serie_id=1", headers={"Authorization": f"Bearer {token}"})
-        self.assertEquals(1, request.json()[0]["id"])
+        self.assertEquals(1, request.json()[0]["episode_id"])
         self.assertTrue(isinstance(request.json(), list))
 
     def testEpisodeGetShouldReturnSpecificEpisode(self) -> None:
