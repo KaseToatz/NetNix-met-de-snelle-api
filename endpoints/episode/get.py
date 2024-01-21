@@ -18,7 +18,7 @@ class GetMovie(Endpoint):
                         if not result:
                             return JSONResponse({"error": "This movie does not exist."}, 400)
                     else:
-                        await cursor.callproc("get_episodes_from_serie", (serie_id))
+                        await cursor.callproc("get_episodes_from_serie", (serie_id,))
                         result = await cursor.fetchall()
                         if not result:
                             return JSONResponse({"error": "No episodes found or serie does not exist."}, 400)
