@@ -32,7 +32,7 @@ class Connection:
         self.connection: aiomysql.Connection = None
 
     async def __aenter__(self) -> aiomysql.Connection:
-        self.connection = await aiomysql.connect("192.168.1.100", self.username, self.password, DB_NAME)
+        self.connection = await aiomysql.connect("127.0.0.1", self.username, self.password, DB_NAME)
         return self.connection
     
     async def __aexit__(self, *args) -> None:
